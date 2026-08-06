@@ -15,16 +15,24 @@ Verilog implementation of an SPI Slave interfaced with a Single-Port RAM on FPGA
 
 # Repository Structure
 
+<img width="1708" height="1088" alt="image" src="https://github.com/user-attachments/assets/d2563b88-58bf-4b60-8b1a-821202c10013" />
+
 ```text
 SPI_RAM_Project/
+│
 ├── code/
 │   ├── RTL/
 │   ├── constraints/
 │   ├── scripts/
 │   │   └── waveforms/
 │   └── testbenches/
+│
 ├── docs/
-└── questa_projects/
+├── standards/
+├── questa_projects/
+│
+├── .gitignore
+└── README.md
 ```
 ---
 
