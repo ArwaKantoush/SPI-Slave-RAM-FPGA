@@ -25,7 +25,7 @@ SPI_RAM_Project/
 │   └── testbenches/
 ├── docs/
 └── questa_projects/
-
+```
 ---
 
 # Repository Navigation
