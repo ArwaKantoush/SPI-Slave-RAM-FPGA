@@ -1,4 +1,4 @@
-# SPI-Slave-RAM-FPGA — Team <Nexus>
+# Nexus-SPI-Slave-RAM — Team Nexus
 
 Verilog implementation of an SPI Slave interfaced with a Single-Port RAM on FPGA. The project covers FSM state encoding comparisons (Gray, One-Hot, Sequential), timing/slack analysis, QuestaSim simulation, Vivado ILA debug core integration, and bitstream generation.
 
@@ -15,18 +15,16 @@ Verilog implementation of an SPI Slave interfaced with a Single-Port RAM on FPGA
 
 # Repository Structure
 
+```text
 SPI_RAM_Project/
-│
 ├── code/
 │   ├── RTL/
 │   ├── constraints/
 │   ├── scripts/
 │   │   └── waveforms/
 │   └── testbenches/
-│
 ├── docs/
 └── questa_projects/
-
 
 ---
 
