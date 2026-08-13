@@ -1,11 +1,11 @@
 # 🚀 SPI Slave with Single-Port RAM (FPGA Implementation)
 
-![Verilog](https://img.shields.io/badge/RTL-Verilog%20%7C%20SystemVerilog-blue?style=for-the-badge&logo=IEEE)
+![Verilog](https://img.shields.io/badge/RTL-Verilog-blue?style=for-the-badge&logo=IEEE)
 ![Tools](https://img.shields.io/badge/Simulation-QuestaSim%20%2F%20ModelSim-orange?style=for-the-badge)
 ![Synthesis](https://img.shields.io/badge/Synthesis-Xilinx%20Vivado-red?style=for-the-badge)
-![Hardware](https://img.shields.io/badge/Target-Artix--7%20FPGA-green?style=for-the-badge)
+![Hardware](https://img.shields.io/badge/Target-FPGA-green?style=for-the-badge)
 
-A robust, fully verified, and modular hardware implementation of an **SPI Slave Interface** integrated with a **Single-Port RAM** block. Designed in Verilog HDL, verified via SystemVerilog, and optimized for FPGA synthesis and hardware deployment.
+A robust, fully verified, and modular hardware implementation of an **SPI Slave Interface** integrated with a **Single-Port RAM** block. Designed in Verilog HDL and optimized for FPGA synthesis and hardware deployment.
 
 ---
 
@@ -25,10 +25,10 @@ The main objective of this project is to implement a synchronous **SPI (Serial P
 
 ### Key Architecture Features
 * **10-bit Serial Transmission:** Each incoming frame via `MOSI` consists of 2 control bits followed by an 8-bit payload (Address or Data).
-* **FSM-Driven SPI Slave:** Robust Finite State Machine controlling serial-to-parallel conversion, handshake signals (`rx_valid`, `tx_valid`), and parallel-to-serial data output.
+* **FSM-Driven SPI Slave:** Finite State Machine controlling serial-to-parallel conversion, handshake signals (`rx_valid`, `tx_valid`), and parallel-to-serial data output via `MISO`.
 * **Synchronous Single-Port Memory:** 256-location memory depth (`ADDR_SIZE = 8`) with 8-bit data width (`DATA_WIDTH = 8`).
-* **Active-Low Asynchronous Reset:** Ensures immediate initialization of state registers and memory flags.
-* **Automated Toolchain:** Tcl and DO automation scripts provided for 1-click simulation runs and Vivado synthesis.
+* **Active-Low Asynchronous Reset:** Ensures immediate initialization of state registers and memory flags (`rst_n`).
+* **Automated Workflow:** Dedicated Tcl and DO automation scripts provided for individual module testbenches as well as top-level synthesis.
 
 ---
 
@@ -36,13 +36,13 @@ The main objective of this project is to implement a synchronous **SPI (Serial P
 
 ```text
  +--------------------------------------------------------------------------------+
- |                               SPI_RAM_wrapper                                  |
+ |                                  SPI_Wrapper                                   |
  |                                                                                |
  |   +----------------------+   rx_data [9:0]   +-----------------------------+   |
  |   |                      |------------------>|                             |   |
  |   |                      |   rx_valid        |                             |   |
  |   |                      |------------------>|                             |   |
- |   |      SPI Slave       |                   |       Single-Port RAM       |   |
+ |   |      SPI_SLAVE       |                   |             RAM             |   |
  |   |    Control Module    |   tx_data [7:0]   |           Memory            |   |
  |   |                      |<------------------|                             |   |
  |   |                      |   tx_valid        |                             |   |
@@ -68,70 +68,53 @@ The Master communicates by pulling `SS_n` LOW and shifting 10 bits sequentially 
 
 ---
 
-## 🧱 RTL Submodules Specification
-
-### 1. SPI Slave (`RTL/SPI_Slave.v`)
-
-* **States:** `IDLE`, `CHK_CMD`, `WRITE`, `READ_ADD`, `READ_DATA`.
-* Converts incoming serial stream (`MOSI`) into parallel word (`rx_data[9:0]`).
-* Asserts `rx_valid` flag to notify RAM that valid parallel command is ready.
-* Converts parallel memory data (`tx_data[7:0]`) back to serial stream (`MISO`) during read data mode.
-
-### 2. Single-Port RAM (`RTL/RAM.v`)
-
-* Memory matrix: `reg [7:0] memory [255:0]`.
-* Internal registers to store Write Address (`wr_addr`) and Read Address (`rd_addr`).
-* Asserts `tx_valid` when requested read data is retrieved and available on `tx_data`.
-
-### 3. Top Wrapper (`RTL/SPI_RAM_wrapper.v`)
-
-* Encapsulates `SPI_Slave` and `RAM` modules.
-* Exposes external SPI pins: `MOSI`, `MISO`, `SS_n`, `clk`, `rst_n`.
-
----
-
 ## 📂 Repository Structure
 
 ```text
 SPI-Slave-RAM-FPGA/
-├── RTL/                  # Production RTL Verilog Source Code
-│   ├── SPI_Slave.v       # SPI Slave Controller & FSM
-│   ├── RAM.v             # Single-Port Memory Array
-│   └── SPI_RAM_wrapper.v # Top-Level System Wrapper
-├── Testbench/            # SystemVerilog Test Environment
-│   ├── SPI_RAM_wrapper_tb.sv # Automated Self-Checking Testbench
-│   └── ram.dat           # Initial Memory Values Datafile
-├── Scripts/              # Automation Scripts
-│   ├── run.do            # ModelSim / QuestaSim Simulation Script
-│   └── run.tcl           # Vivado Synthesis & Bitstream Script
-├── docs/                 # Detailed Engineering Specifications
-│   ├── architecture.md   # System Architecture & Signal Interconnects
-│   ├── spi_slave.md      # FSM State Diagrams & Port Mapping
-│   ├── ram.md            # RAM Protocol & Operation Modes
-│   ├── spi_wrapper.md    # Top Module Parameters
-│   └── verification.md   # Verification Plan & Coverage Metrics
-├── standards/            # Coding & Repository Guidelines
-│   ├── coding_style.md   # Verilog/SV Naming & Style Rules
-│   ├── git_workflow.md   # Branching & Commit Message Rules
-│   └── code_review_checklist.md # Quality Checklist
-├── questa_projects/      # Local Compilation Workspaces
-├── .gitignore            # Clean Repo Rule File
-└── README.md             # Main Repository Gateway
+├── code/
+│   ├── RTL/                     # Verilog RTL Source Code
+│   │   ├── RAM.v                # Single-Port Memory Array
+│   │   ├── SPI_SLAVE.v          # SPI Slave Controller & FSM
+│   │   └── SPI_Wrapper.v        # Top-Level System Wrapper
+│   ├── constraints/             # FPGA Design Constraints
+│   │   └── SPI_Wrapper.xdc      # Xilinx Pin Mapping & Timing Constraints
+│   ├── scripts/                 # Simulation & Synthesis Automation
+│   │   ├── run_RAM_tb.do        # ModelSim DO script for RAM testbench
+│   │   ├── run_SPI_SLAVE_tb.do  # ModelSim DO script for SPI Slave testbench
+│   │   ├── run_SPI_Wrapper_tb.do# ModelSim DO script for Top Wrapper testbench
+│   │   └── vivado_script.tcl    # Vivado Synthesis & Implementation Script
+│   └── testbenches/             # Test Environments
+│       ├── RAM_tb.v             # Unit Testbench for RAM
+│       ├── SPI_SLAVE_tb.v       # Unit Testbench for SPI Slave
+│       └── SPI_Wrapper_tb.v     # Full System Integration Testbench
+├── docs/                        # Architectural Specifications & Reports
+│   ├── architecture.md          # System Architecture & Signal Interconnects
+│   ├── ram.md                   # RAM Memory Specifications
+│   ├── spi_slave.md             # FSM State Diagrams & Port Mapping
+│   ├── spi_wrapper.md           # Top Module Parameters
+│   └── verification.md          # Verification Plan & Scenarios
+├── standards/                   # Team Coding & Project Standards
+│   ├── code_review_checklist.md # Quality Checklist
+│   ├── coding_style.md          # Verilog Naming & Style Rules
+│   ├── documentation_standards.md
+│   ├── git_workflow.md          # Git Branching & Commit Guidelines
+│   └── repository_structure.md
+├── questa_projects/             # Local Simulation Output Folder
+├── .gitignore                   # Tool Build Exclusion Rules
+└── README.md                    # Main Landing Page
 
 ```
 
 ---
 
-## 🧪 Verification & Simulation Strategy
+## 🧪 Simulation & Verification
 
-Comprehensive functional verification is performed using SystemVerilog testbenches (`Testbench/SPI_RAM_wrapper_tb.sv`).
+Individual block verification as well as full top-level integration testing is supported:
 
-### Tested Scenarios:
-
-1. **Reset Behavior:** Verify all internal registers reset to `0` upon `rst_n = 0`.
-2. **Write Sequence Flow:** Test latching write address followed by writing data to memory.
-3. **Read Sequence Flow:** Test setting read address and inspecting multi-bit serial data shifted out on `MISO`.
-4. **Boundary & Corner Cases:** Consecutive writes/reads, rapid `SS_n` toggling, and random payload checks.
+1. **RAM Block (`RAM_tb.v`)**: Tests independent memory read/write operations and address registers.
+2. **SPI Slave Block (`SPI_SLAVE_tb.v`)**: Tests FSM state transitions, serial-to-parallel conversion, and `MISO` shifting logic.
+3. **Top Wrapper (`SPI_Wrapper_tb.v`)**: Verifies end-to-end integration of serial commands driving memory operations.
 
 ---
 
@@ -139,38 +122,42 @@ Comprehensive functional verification is performed using SystemVerilog testbench
 
 ### 1. Run Simulation (QuestaSim / ModelSim)
 
-Launch your simulator terminal, navigate to `Scripts/`, and execute:
+Launch your simulator, navigate to `code/scripts/`, and run any of the simulation DO scripts:
 
 ```tcl
-cd Scripts/
-do run.do
+cd code/scripts/
+
+# To test Top Wrapper integration:
+do run_SPI_Wrapper_tb.do
+
+# To test individual modules:
+do run_SPI_SLAVE_tb.do
+do run_RAM_tb.do
 
 ```
 
-### 2. Run Synthesis & Generate Schematics (Xilinx Vivado)
+### 2. Run Synthesis & FPGA Implementation (Xilinx Vivado)
 
-Open Vivado Tcl Console, navigate to `Scripts/`, and run:
+Open Vivado Tcl Console, navigate to `code/scripts/`, and run:
 
 ```tcl
-cd Scripts/
-source run.tcl
+cd code/scripts/
+source vivado_script.tcl
 
 ```
 
-*(This script builds the project, synthesizes RTL, exports PDF schematics to `docs/`, and generates resource utilization reports).*
+*(This script builds the project, runs elaboration & synthesis, applies `SPI_Wrapper.xdc` constraints, and exports reports into `docs/`).*
 
 ---
 
 ## 🔗 Technical Documentation Links
 
-For further details, check our project guidelines and design specs:
-
-* 📖 [System Architecture Specs](https://www.google.com/search?q=docs/architecture.md)
+* 📖 [System Architecture Document](https://www.google.com/search?q=docs/architecture.md)
 * 📖 [SPI Slave Specification](https://www.google.com/search?q=docs/spi_slave.md)
 * 📖 [RAM Protocol Specification](https://www.google.com/search?q=docs/ram.md)
-* 📖 [Verification Strategy](https://www.google.com/search?q=docs/verification.md)
+* 📖 [Verification Plan](https://www.google.com/search?q=docs/verification.md)
 * 📏 [Coding Style Standard](https://www.google.com/search?q=standards/coding_style.md)
-* 🔀 [Git Workflow & Branching](https://www.google.com/search?q=standards/git_workflow.md)
+* 🔀 [Git Workflow Guidelines](https://www.google.com/search?q=standards/git_workflow.md)
 
 ```
 
