@@ -9,6 +9,8 @@ A robust, fully verified, and modular hardware implementation of an **SPI Slave 
 
 ---
 
+<img width="1254" height="1254" alt="WhatsApp Image 2026-08-08 at 1 10 26 PM" src="https://github.com/user-attachments/assets/18967f9b-311a-4caa-bb5d-c823e28bfdfc" />
+
 ## 👥 Team: SPI Trio
 
 | Member Name | Role & Primary Contributions | Deliverables | GitHub Profile |
