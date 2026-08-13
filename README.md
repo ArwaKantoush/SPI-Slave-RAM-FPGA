@@ -13,7 +13,7 @@ A robust, fully verified, and modular hardware implementation of an **SPI Slave 
 
 | Member Name | Role & Primary Contributions | Deliverables | GitHub Profile |
 | :--- | :--- | :--- | :--- |
-| **Arwa Kantoush** | Verification & Integration Lead | `SPI_SLAVE_tb.v`, `SPI_Wrapper_tb.v`, Repository Structure & Documentation | [ArwaKantoush](https://github.com/ArwaKantoush) |
+| **Arwa Kantoush** | Verification & Integration Lead | `SPI_SLAVE_tb.v`, `SPI_Wrapper_tb.v` | [ArwaKantoush](https://github.com/ArwaKantoush) |
 | **Haneen Shahin** | RTL Design Lead | `SPI_SLAVE.v`, `SPI_Wrapper.v` | [HaneenShahin](https://github.com/Haneen-Shahin) |
 | **Nada Abdelmotlb**| Memory Subsystem Lead | `RAM.v`, `RAM_tb.v` | [NadaAbdelmotlb](https://github.com/NadaAbdelmotlb) |
 
@@ -74,20 +74,20 @@ The Master communicates by pulling `SS_n` LOW and shifting 10 bits sequentially 
 SPI-Slave-RAM-FPGA/
 ├── code/
 │   ├── RTL/                     # Verilog RTL Source Code
-│   │   ├── RAM.v                # Single-Port Memory Array
-│   │   ├── SPI_SLAVE.v          # SPI Slave Controller & FSM
-│   │   └── SPI_Wrapper.v        # Top-Level System Wrapper
+│   │   ├── RAM.v                # Developed by Nada
+│   │   ├── SPI_SLAVE.v          # Developed by Haneen
+│   │   └── SPI_Wrapper.v        # Developed by Haneen
 │   ├── constraints/             # FPGA Design Constraints
 │   │   └── SPI_Wrapper.xdc      # Xilinx Pin Mapping & Timing Constraints
 │   ├── scripts/                 # Simulation & Synthesis Automation
-│   │   ├── run_RAM_tb.do        # ModelSim DO script for RAM testbench
-│   │   ├── run_SPI_SLAVE_tb.do  # ModelSim DO script for SPI Slave testbench
-│   │   ├── run_SPI_Wrapper_tb.do# ModelSim DO script for Top Wrapper testbench
-│   │   └── vivado_script.tcl    # Vivado Synthesis & Implementation Script
+│   │   ├── run_RAM_tb.do        
+│   │   ├── run_SPI_SLAVE_tb.do  
+│   │   ├── run_SPI_Wrapper_tb.do
+│   │   └── vivado_script.tcl    
 │   └── testbenches/             # Test Environments
-│       ├── RAM_tb.v             # Unit Testbench for RAM
-│       ├── SPI_SLAVE_tb.v       # Unit Testbench for SPI Slave
-│       └── SPI_Wrapper_tb.v     # Full System Integration Testbench
+│       ├── RAM_tb.v             # Developed by Nada
+│       ├── SPI_SLAVE_tb.v       # Developed by Arwa
+│       └── SPI_Wrapper_tb.v     # Developed by Arwa
 ├── docs/                        # Architectural Specifications & Reports
 │   ├── architecture.md          # System Architecture & Signal Interconnects
 │   ├── ram.md                   # RAM Memory Specifications
