@@ -1,7 +1,3 @@
-### 2. `docs/ram.md`
-> **المضمون:** مواصفات ذاكرة الـ RAM وقواعد القراءة والكتابة فيها.
-
-```markdown
 # 💾 Single-Port RAM Specification
 
 ## Overview
