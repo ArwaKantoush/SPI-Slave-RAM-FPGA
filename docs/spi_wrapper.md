@@ -6,12 +6,12 @@ The `SPI_RAM_wrapper` is the top-level module connecting the `SPI_Slave` module 
 ## Top-Level Interface Ports
 
 ```verilog
-module SPI_RAM_wrapper (
-    input  wire MOSI,
-    input  wire SS_n,
-    input  wire clk,
-    input  wire rst_n,
-    output wire MISO
+module SPI_Wrapper (
+    input  MOSI,
+    input  SS_n,
+    input  clk,
+    input  rst_n,
+    output MISO
 );
 Internal Signals Mapping
 rx_data [9:0]: Output of SPI_Slave connected to din of RAM.
