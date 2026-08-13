@@ -11,11 +11,11 @@ A robust, fully verified, and modular hardware implementation of an **SPI Slave 
 
 ## 👥 Team: SPI Trio
 
-| Member Name | Role / Focus Area | GitHub Profile |
-| :--- | :--- | :--- |
-| **Arwa Kantoush** | Digital IC Design & Integration | [ArwaKantoush](https://github.com/ArwaKantoush) |
-| **Haneen Shahin** | RTL Design & FSM Logic | [HaneenShahin](https://github.com/Haneen-Shahin) |
-| **Nada Abdelmotlb**| Verification & Testbench Strategy | [NadaAbdelmotlb](https://github.com/NadaAbdelmotlb) |
+| Member Name | Role & Primary Contributions | Deliverables | GitHub Profile |
+| :--- | :--- | :--- | :--- |
+| **Arwa Kantoush** | Verification & Integration Lead | `SPI_SLAVE_tb.v`, `SPI_Wrapper_tb.v`, Repository Structure & Documentation | [ArwaKantoush](https://github.com/ArwaKantoush) |
+| **Haneen Shahin** | RTL Design Lead | `SPI_SLAVE.v`, `SPI_Wrapper.v` | [HaneenShahin](https://github.com/Haneen-Shahin) |
+| **Nada Abdelmotlb**| Memory Subsystem Lead | `RAM.v`, `RAM_tb.v` | [NadaAbdelmotlb](https://github.com/NadaAbdelmotlb) |
 
 ---
 
