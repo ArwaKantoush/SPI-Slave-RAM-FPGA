@@ -3,14 +3,14 @@
 This document describes the high-level architecture of the **SPI-Slave-RAM** subsystem.
 
 ## System Overview
-The system consists of two main hardware modules wrapped inside a single top-level module (`SPI_RAM_wrapper`):
+The system consists of two main hardware modules wrapped inside a single top-level module (`SPI_Wrapper`):
 1. **SPI Slave Interface (`SPI_Slave`)**: Handles serial-to-parallel and parallel-to-serial data conversion using a Finite State Machine (FSM).
 2. **Single-Port RAM (`RAM`)**: Provides internal data storage for read and write operations.
 
 ## Subsystem Interaction Flow
 ```text
  +-------------------------------------------------------------------+
- |                        SPI_RAM_wrapper                            |
+ |                        SPI_Wrapper                                |
  |                                                                   |
  |   +-----------------+   rx_data [9:0]   +---------------------+   |
  |   |                 |------------------>|                     |   |
