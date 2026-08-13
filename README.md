@@ -1,4 +1,4 @@
-# 🦹🏻‍♀️⚡SPI Trio Project SPI Slave with Single-Port RAM (FPGA Implementation)
+# 🦹🏻‍♀️⚡SPI Trio Project-SPI Slave with Single-Port RAM (FPGA Implementation)
 
 ![Verilog](https://img.shields.io/badge/RTL-Verilog-blue?style=for-the-badge&logo=IEEE)
 ![Tools](https://img.shields.io/badge/Simulation-QuestaSim%20%2F%20ModelSim-orange?style=for-the-badge)
