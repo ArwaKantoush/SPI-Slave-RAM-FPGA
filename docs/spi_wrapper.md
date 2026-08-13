@@ -1,7 +1,7 @@
-# 📦 SPI RAM Wrapper Specification
+# 📦 SPI Wrapper Specification
 
 ## Overview
-The `SPI_RAM_wrapper` is the top-level module connecting the `SPI_Slave` module and the `RAM` memory block together.
+The `SPI_Wrapper` is the top-level module connecting the `SPI_Slave` module and the `RAM` memory block together.
 
 ## Top-Level Interface Ports
 
