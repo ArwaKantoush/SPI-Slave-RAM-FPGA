@@ -16,7 +16,7 @@ A robust, fully verified, and modular hardware implementation of an **SPI Slave 
 | Member Name | Role & Primary Contributions | Deliverables | GitHub Profile |
 | :--- | :--- | :--- | :--- |
 | **Arwa Kantoush** | Verification & Integration Lead | `SPI_SLAVE_tb.v`, `SPI_Wrapper_tb.v` | [ArwaKantoush](https://github.com/ArwaKantoush) |
-| **Haneen Shahin** | RTL Design Lead & Technical Documentation | `SPI_SLAVE.v` and `SPI_Wrapper.v` RTL modules. | Authored complete project documentation and design reports.| [HaneenShahin](https://github.com/Haneen-Shahin) |
+| **Haneen Shahin** | RTL Design Lead & Technical Documentation | `SPI_SLAVE.v`, `SPI_Wrapper.v`, Project Documentation | [HaneenShahin](https://github.com/Haneen-Shahin) |
 | **Nada Abdelmoteleb**| Memory Subsystem Lead | `RAM.v`, `RAM_tb.v` | [NadaAbdelmotlb](https://github.com/Nada-Abdelmoteleb) |
 
 ---
